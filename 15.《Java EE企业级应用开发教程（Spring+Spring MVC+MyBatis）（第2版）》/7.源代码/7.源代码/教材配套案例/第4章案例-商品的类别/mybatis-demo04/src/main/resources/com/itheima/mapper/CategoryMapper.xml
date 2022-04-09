@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace表示命名空间 -->
+<mapper namespace="com.itheima.mapper.CategoryMapper">
+    <!-- 一对多：查看某一商品类别及其关联的商品信息
+    注意：当关联查询出的列名相同，则需要使用别名区分 -->
+    <select id="findCategoryWithProduct" parameterType="Integer"
+            resultMap="CategoryWithProductResult">
+	      SELECT c.*,p.id as category_id,p.goodsname,p.price
+	      from category c,product p
+	      WHERE c.id=p.category_id
+	         and c.id=#{id}
+	   </select>
+    <resultMap type="com.itheima.pojo.Category"
+               id="CategoryWithProductResult">
+        <id property="id" column="id"/>
+        <result property="typename" column="typename"/>
+        <!-- 一对多关联映射：collection
+    ofType表示属性集合中元素的类型，List<Product>属性即Product类 -->
+        <collection property="productList"
+                    ofType="com.itheima.pojo.Product">
+            <id property="id" column="category_id"/>
+            <result property="goodsname" column="goodsname"/>
+            <result property="price" column="price"/>
+        </collection>
+    </resultMap>
+</mapper>

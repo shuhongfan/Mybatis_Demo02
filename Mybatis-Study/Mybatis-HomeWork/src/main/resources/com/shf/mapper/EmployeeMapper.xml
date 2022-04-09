@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shf.mapper.EmployeeMapper">
+    <select id="selectEmployeeList" resultType="employee">
+        select *
+        from employee;
+    </select>
+
+    <select id="selectEmployeeById" resultType="employee" parameterType="int">
+        select *
+        from employee
+        where id = #{id};
+    </select>
+
+    <!--    添加用户-->
+    <sql id="addKey">
+        <trim suffixOverrides=",">
+            <if test="id!=0">
+                id,
+            </if>
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="age!=0">
+                age,
+            </if>
+            <if test="position!=null">
+                position,
+            </if>
+        </trim>
+    </sql>
+    <sql id="addValue">
+        <trim suffixOverrides=",">
+            <if test="id!=0">
+                #{id},
+            </if>
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="age!=0">
+                #{age},
+            </if>
+            <if test="position!=null">
+                #{position},
+            </if>
+        </trim>
+    </sql>
+    <insert id="addEmployee" parameterType="employee">
+        insert into employee (<include refid="addKey"/>)
+        values (<include refid="addValue"/>);
+    </insert>
+
+
+    <update id="updateEmployee" parameterType="employee">
+        update employee
+        <set>
+            <if test="id!=0">
+                id=#{id},
+            </if>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="age!=0">
+                age=#{age},
+            </if>
+            <if test="position!=null">
+                position=#{position},
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+    <delete id="deleteEmployeeById" parameterType="int">
+        delete
+        from employee
+        where id = #{id};
+    </delete>
+</mapper>

@@ -1,0 +1,31 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--       xmlns:context="http://www.springframework.org/schema/context"-->
+<!--       xsi:schemaLocation="-->
+<!-- 	       http://www.springframework.org/schema/beans-->
+<!-- 	       http://www.springframework.org/schema/beans/spring-beans.xsd-->
+<!-- 	       http://www.springframework.org/schema/context-->
+<!-- 	       http://www.springframework.org/schema/context/spring-context.xsd-->
+<!-- 	">-->
+<!--    &lt;!&ndash;引入属性文件&ndash;&gt;-->
+<!--    <context:property-placeholder location="classpath:jdbc.properties"/>-->
+<!--    &lt;!&ndash;数据源&ndash;&gt;-->
+<!--    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">-->
+<!--        <property name="driverClassName" value="${jdbc.driverClassName}"/>-->
+<!--        <property name="url" value="${jdbc.url}"/>-->
+<!--        <property name="username" value="${jdbc.username}"/>-->
+<!--        <property name="password" value="${jdbc.password}"/>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash;创建SqlSessionFactory对象&ndash;&gt;-->
+<!--    <bean id="sqlSessionFactory"-->
+<!--          class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--        &lt;!&ndash;数据源&ndash;&gt;-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash;扫描Dao包，创建动态代理对象, 会自动存储到spring IOC容器中&ndash;&gt;-->
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--        &lt;!&ndash;指定要扫描的dao的包&ndash;&gt;-->
+<!--        <property name="basePackage" value="com.itheima.dao"/>-->
+<!--    </bean>-->
+<!--</beans>-->

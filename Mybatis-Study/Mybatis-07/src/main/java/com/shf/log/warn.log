@@ -1,0 +1,2 @@
+2022-03-01 14:31:11 下午 [Thread: main][ Class:org.apache.ibatis.io.SerialFilterChecker >> Method: org.apache.ibatis.io.SerialFilterChecker.check(SerialFilterChecker.java:45) ]
+WARN:As you are using functionality that deserializes object streams, it is recommended to define the JEP-290 serial filter. Please refer to https://docs.oracle.com/pls/topic/lookup?ctx=javase15&id=GUID-8296D8E8-2B93-4B9A-856E-0A65AF9B8C66

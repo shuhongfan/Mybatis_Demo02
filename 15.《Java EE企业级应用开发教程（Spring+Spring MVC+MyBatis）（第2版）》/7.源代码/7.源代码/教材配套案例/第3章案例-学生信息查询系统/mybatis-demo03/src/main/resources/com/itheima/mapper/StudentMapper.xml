@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.StudentMapper">
+    <select id="findStudentByNameAndMajor"
+            parameterType="com.itheima.pojo.Student"
+            resultType="com.itheima.pojo.Student">
+        select * from dm_student where 1=1
+        <choose>
+            <when test="name !=null and name !=''">
+                and name like concat('%',#{name}, '%')
+            </when>
+            <when test="major !=null and major !=''">
+                and major= #{major}
+            </when>
+            <otherwise>
+                and sno is not null
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--<foreach>遍历List -->
+    <select id="findByList" parameterType="java.util.List"
+            resultType="com.itheima.pojo.Student">
+        select * from dm_student where id in
+        <foreach item="id" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>

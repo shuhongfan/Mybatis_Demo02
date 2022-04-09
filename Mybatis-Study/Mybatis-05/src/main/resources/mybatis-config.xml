@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!--    引入外部配置文件-->
+    <properties resource="db.properties">
+        <property name="username" value="1111"/>
+        <property name="pwd" value="roo111t"/>
+    </properties>
+
+    <!--    可以给实体类起别名-->
+    <typeAliases>
+        <!--        <typeAlias type="com.shf.pojo.Users" alias="user"/>-->
+        <package name="com.shf.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--    每一个MapperXML都需要在Mybatis配置中心注册-->
+    <mappers>
+        <!--        <mapper resource="com/shf/dao/UserMapper.xml"/>-->
+        <!--        <mapper class="com.shf.dao.UserMapper"/>-->
+        <package name="com.shf.dao"/>
+    </mappers>
+</configuration>

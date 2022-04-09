@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 环境配置 -->
+    <!-- 加载类路径下的属性文件 -->
+    <properties resource="db.properties"/>
+    <settings>
+        <!-- 打开延迟加载的开关 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 将积极加载改为消息加载，即按需加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 开启二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+
+    </settings>
+
+    <!--使用扫描包的形式定义别名 -->
+    <typeAliases>
+        <package name="com.itheima.pojo"/>
+    </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接相关配置 ,db.properties文件中的内容-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${mysql.driver}"/>
+                <property name="url" value="${mysql.url}"/>
+                <property name="username" value="${mysql.username}"/>
+                <property name="password" value="${mysql.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- mapping文件路径配置 -->
+    <mappers>
+        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="com/itheima/mapper/StudentMapper.xml"/>
+        <mapper resource="com/itheima/mapper/CustomerMapper.xml"/>
+        <mapper resource="com/itheima/mapper/IdCardMapper.xml"/>
+        <mapper resource="com/itheima/mapper/PersonMapper.xml"/>
+        <mapper resource="com/itheima/mapper/UsersMapper.xml"/>
+        <mapper resource="com/itheima/mapper/OrdersMapper.xml"/>
+        <mapper resource="com/itheima/mapper/ProductMapper.xml"/>
+        <mapper resource="com/itheima/mapper/BookMapper.xml"/>
+
+    </mappers>
+
+</configuration>

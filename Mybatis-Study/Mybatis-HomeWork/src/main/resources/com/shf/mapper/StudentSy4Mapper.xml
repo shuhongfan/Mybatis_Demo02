@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shf.mapper.StudentSy4Mapper">
+    <!--    开启二级缓存-->
+    <cache/>
+
+    <!--    添加-->
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="sno!=0 and sno!=''">
+                sno,
+            </if>
+            <if test="sname!=null and sname!=''">
+                sname,
+            </if>
+            <if test="ssex!=0 and ssex!=''">
+                ssex,
+            </if>
+            <if test="birthday!=null">
+                birthday,
+            </if>
+            <if test="local!=null and local!=''">
+                local,
+            </if>
+            <if test="major!=null and major!=''">
+                major,
+            </if>
+            <if test="department!=null and department!=''">
+                department,
+            </if>
+        </trim>
+    </sql>
+    <sql id="values">
+        <trim suffixOverrides=",">
+            <if test="sno!=0 and sno!=''">
+                #{sno},
+            </if>
+            <if test="sname!=null and sname!=''">
+                #{sname},
+            </if>
+            <if test="ssex!=0 and ssex!=''">
+                #{ssex},
+            </if>
+            <if test="birthday!=null">
+                #{birthday},
+            </if>
+            <if test="local!=null and local!=''">
+                #{local},
+            </if>
+            <if test="major!=null and major!=''">
+                #{major},
+            </if>
+            <if test="department!=null and department!=''">
+                #{department},
+            </if>
+        </trim>
+    </sql>
+    <insert id="addStudent" parameterType="studentSy4">
+        insert into studentsy4 (<include refid="key"/>)
+        values (<include refid="values"/>);
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 将指定类配置给Spring，让Spring创建HelloSpring对象的实例 -->
+    <bean id="helloSpring" class="com.itheima.HelloSpring">
+        <!--为userName属性赋值-->
+        <property name="userName" value="张三"></property>
+    </bean>
+    <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl"></bean>
+    <bean id="userService" class="com.itheima.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+</beans>

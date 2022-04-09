@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 注册Bean -->
+    <bean name="userDao" class="com.itheima.demo03.UserDaoImpl"/>
+    <bean name="xmlAdvice" class="com.itheima.demo03.XmlAdvice"/>
+    <!-- 配置Spring AOP-->
+    <aop:config>
+        <!-- 指定切点 -->
+        <aop:pointcut id="pointcut" expression="execution(*
+              com.itheima.demo03.UserDaoImpl.*(..))"/>
+        <!-- 指定切面 -->
+        <aop:aspect ref ="xmlAdvice">
+            <!-- 指定前置通知 -->
+            <aop:before method="before" pointcut-ref="pointcut"/>
+            <!-- 指定返回通知 -->
+            <aop:after-returning method="afterReturning"
+                                 pointcut-ref="pointcut"/>
+            <!-- 指定环绕方式 -->
+            <aop:around method="around" pointcut-ref="pointcut"/>
+            <!-- 指定异常通知 -->
+            <aop:after-throwing method="afterException"
+                                pointcut-ref="pointcut"/>
+            <!-- 指定后置通知 -->
+            <aop:after method="after" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

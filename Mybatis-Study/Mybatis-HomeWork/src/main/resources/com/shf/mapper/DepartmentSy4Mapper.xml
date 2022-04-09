@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shf.mapper.DepartmentSy4Mapper">
+    <!--    开启二级缓存-->
+    <cache/>
+
+    <select id="getDepartment" resultMap="StudentAndDepartmentList" parameterType="int">
+        select *
+        from studentsy4,
+             departmentsy4
+        where studentsy4.department = departmentsy4.dno
+          and dno = #{dno};
+    </select>
+
+    <resultMap id="StudentAndDepartmentList" type="departmentSy4">
+        <id column="dno" property="dno"/>
+        <result column="dname" property="dname"/>
+        <collection property="students" ofType="studentSy4">
+            <id property="sno" column="sno"/>
+            <result property="sname" column="sname"/>
+            <result property="ssex" column="ssex"/>
+            <result property="birthday" column="birthday"/>
+            <result property="local" column="local"/>
+            <result property="major" column="major"/>
+            <result property="department" column="department"/>
+        </collection>
+    </resultMap>
+</mapper>

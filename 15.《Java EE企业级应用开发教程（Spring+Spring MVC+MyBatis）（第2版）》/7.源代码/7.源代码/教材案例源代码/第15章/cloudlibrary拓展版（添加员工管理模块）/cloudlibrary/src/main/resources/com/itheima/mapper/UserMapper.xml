@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.UserMapper">
+
+    <insert id="addUser">
+    insert into user(user_id,user_name,user_password,user_email,user_hiredate,user_status,user_departuredate,user_role)
+     values (#{id},#{name},#{password},#{email},#{hiredate},#{status},#{departuredate},#{role})
+    </insert>
+    <update id="editUser" parameterType="com.itheima.domain.User">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null" >
+                user_name = #{name},
+            </if>
+            <if test="password != null" >
+                user_password = #{password},
+            </if>
+            <if test="email != null" >
+                user_email = #{email},
+            </if>
+            <if test="hiredate != null" >
+                user_hiredate = #{hiredate},
+            </if>
+            <if test="status != null" >
+                user_status = #{status},
+            </if>
+            <if test="role != null" >
+                user_role = #{role},
+            </if>
+            <if test="departuredate != null" >
+                user_departuredate = #{departuredate}
+            </if>
+        </trim>
+        where user_id = #{id}
+    </update>
+</mapper>

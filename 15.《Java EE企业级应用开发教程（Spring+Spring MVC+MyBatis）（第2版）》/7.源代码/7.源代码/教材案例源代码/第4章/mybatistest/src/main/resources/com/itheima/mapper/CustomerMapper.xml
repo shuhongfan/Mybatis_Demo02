@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.CustomerMapper">
+    <!-- <if>元素使用 -->
+    <select id="findCustomerByNameAndJobs"
+            parameterType="com.itheima.pojo.Customer"
+            resultType="com.itheima.pojo.Customer">
+        select * from t_customer
+        <!--where 1=1 -->
+        <!-- <where> -->
+            <trim prefix="where" prefixOverrides="and">
+                <if test="username !=null and username !=''">
+                    and username like concat('%',#{username}, '%')
+                </if>
+                <if test="jobs !=null and jobs !=''">
+                    and jobs= #{jobs}
+                </if>
+            </trim>
+        <!--</where> -->
+    </select>
+
+    <!--<choose>(<when>、<otherwise>)元素使用 -->
+    <select id="findCustomerByNameOrJobs"
+            parameterType="com.itheima.pojo.Customer"
+            resultType="com.itheima.pojo.Customer">
+        select * from t_customer where 1=1
+        <choose>
+            <!--条件判断 -->
+            <when test="username !=null and username !=''">
+                and username like concat('%',#{username}, '%')
+            </when>
+            <when test="jobs !=null and jobs !=''">
+                and jobs= #{jobs}
+            </when>
+            <otherwise>
+                and phone is not null
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- <set>元素 -->
+    <update id="updateCustomerBySet"
+            parameterType="com.itheima.pojo.Customer">
+        update t_customer
+        <set>
+            <if test="username !=null and username !=''">
+                username=#{username},
+            </if>
+            <if test="jobs !=null and jobs !=''">
+                jobs=#{jobs},
+            </if>
+            <if test="phone !=null and phone !=''">
+                phone=#{phone},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!-- <trim>元素 -->
+    <update id="updateCustomerByTrim"
+            parameterType="com.itheima.pojo.Customer">
+        update t_customer
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username !=null and username !=''">
+                username=#{username},
+            </if>
+            <if test="jobs !=null and jobs !=''">
+                jobs=#{jobs},
+            </if>
+            <if test="phone !=null and phone !=''">
+                phone=#{phone},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <!--<foreach>元素使用 -->
+    <select id="findByArray" parameterType="java.util.Arrays"
+            resultType="com.itheima.pojo.Customer">
+        select * from t_customer where id in
+        <foreach item="id" index="index" collection="array"
+                 open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <!--<foreach>元素使用 -->
+    <select id="findByList" parameterType="java.util.Arrays"
+            resultType="com.itheima.pojo.Customer">
+        select * from t_customer where id in
+        <foreach item="id" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <!--<foreach>元素使用 -->
+    <select id="findByMap" parameterType="java.util.Map"
+            resultType="com.itheima.pojo.Customer">
+        select * from t_customer where jobs=#{jobs} and id in
+        <foreach item="roleMap" index="index" collection="id"
+                 open="(" separator="," close=")">
+            #{roleMap}
+        </foreach>
+    </select>
+
+</mapper>

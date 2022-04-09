@@ -1,0 +1,4 @@
+2022-02-28 12:29:26 下午 [Thread: main][ Class:com.shf.dao.UserMapperTest >> Method: com.shf.dao.UserMapperTest.testLog4j(UserMapperTest.java:27) ]
+INFO:info: 进入testLog4j
+2022-02-28 12:29:26 下午 [Thread: main][ Class:com.shf.dao.UserMapperTest >> Method: com.shf.dao.UserMapperTest.testLog4j(UserMapperTest.java:29) ]
+ERROR:error:进入了testLog4j

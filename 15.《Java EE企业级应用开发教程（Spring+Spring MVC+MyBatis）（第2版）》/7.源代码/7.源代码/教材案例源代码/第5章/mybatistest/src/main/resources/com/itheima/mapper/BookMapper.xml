@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.BookMapper">
+    <!-- 根据id查询图书信息 -->
+    <select id="findBookById" parameterType="Integer"
+            resultType="com.itheima.pojo.Book">
+    	     SELECT * from tb_book where id=#{id}
+    	    </select>
+    <!-- 根据id更新图书信息 -->
+<!--    <update id="updateBook"-->
+<!--            parameterType="com.itheima.pojo.Book">-->
+<!--       	         update tb_book set bookName=#{bookName},price=#{price}-->
+<!--       		    where id=#{id}-->
+<!--       		</update>-->
+
+    <!-- 根据id更新图书信息 -->
+    <update id="updateBook"
+            parameterType="com.itheima.pojo.Book">
+     update tb_book set bookName=#{bookName},price=#{price} where id=#{id}
+</update>
+<cache />
+</mapper>

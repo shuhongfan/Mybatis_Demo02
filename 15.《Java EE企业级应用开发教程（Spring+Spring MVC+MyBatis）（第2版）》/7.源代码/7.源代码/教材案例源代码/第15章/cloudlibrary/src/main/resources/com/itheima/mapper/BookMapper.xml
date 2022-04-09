@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.BookMapper">
+<!--新增图书-->
+<insert id="addBook" parameterType="com.itheima.domain.Book">
+    insert into book(book_id,book_name,book_isbn,book_press,book_author,book_pagination,book_price,book_uploadtime,book_status,book_borrower,book_borrowtime,book_returntime)
+    values (#{id},#{name},#{isbn},#{press},#{author},#{pagination},#{price},#{uploadTime},#{status},#{borrower},#{borrowTime},#{returnTime})
+</insert>
+<!--修改book信息-->
+    <update id="editBook" >
+        update book
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null" >
+                book_name = #{name},
+            </if>
+            <if test="isbn != null" >
+                book_isbn = #{isbn},
+            </if>
+            <if test="press != null" >
+                book_press = #{press},
+            </if>
+            <if test="author != null" >
+                book_author = #{author},
+            </if>
+            <if test="pagination != null" >
+                book_pagination = #{pagination},
+            </if>
+            <if test="price != null" >
+                book_price = #{price},
+            </if>
+            <if test="uploadTime != null" >
+                book_uploadtime = #{uploadTime},
+            </if>
+            <if test="status != null" >
+                book_status = #{status},
+            </if>
+            <if test="borrower!= null" >
+                book_borrower= #{borrower },
+            </if>
+            <if test="borrowTime != null" >
+                book_borrowtime = #{borrowTime},
+            </if>
+            <if test="returnTime != null" >
+                book_returntime = #{returnTime}
+            </if>
+        </trim>
+        where book_id = #{id}
+    </update>
+</mapper>
